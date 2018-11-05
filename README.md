@@ -1,4 +1,4 @@
-#Homework 3
+# Homework 3
 ## Download _Drosophila melanogaster_ genome
 Go to homework 3 directory  
 
@@ -8,16 +8,16 @@ Go to homework 3 directory
         melanogaster/current/fasta/dmel-all-chromosome-
         r6.24.fasta.gz
 
-###Check file integrity
+### Check file integrity
     $ md5sum dmel-all-chromosome-r6.23.fasta.gz  
 
 71a25289ae2e630d5247856dc2a67ab1  dmel-all-chromosome- 
 	r6.24.fasta.gz
 
-###Unzip the file
+### Unzip the file
 	$ gunzip dmel-all-chromosome-r6.24.fasta.gz 
 
-####1. Calculate total number of nucleotides
+#### 1. Calculate total number of nucleotides
 	$ module load jje/kent
 	$ faSize dmel-all-chromosome-r6.24.fasta 
 143726002 bases (1152978 N's 142573024 real 142573024 upper 0 lower) in 1870 sequences in 1 files  
@@ -29,33 +29,33 @@ L count: mean 0.0 sd 0.0
 
 **Answer= 143726002 nucleotides**
 
-####2. Calculate total number of N's
+#### 2. Calculate total number of N's
 **Answer = 1152978 N's**
 
-####3. Calculate total number of sequences 
+#### 3. Calculate total number of sequences 
 **Answer = 1870 sequences**  
 
 	$ grep -c "^>" dmel-all-chromosome-r6.24.fasta 
 1870
 
-###Summarize an annotation file  
+### Summarize an annotation file  
 
-#Download gtf file for _D. melanogaster_
+# Download gtf file for _D. melanogaster_
 
 	$ wget ftp://ftp.flybase.net/genomes/Drosophila_
 	melanogaster/current/gtf/dmel-all-r6.24.gtf.gz
 
-###Verify file integrity  
+### Verify file integrity  
 
 	$ md5sum dmel-all-r6.24.gtf.gz 
 5cd5dcfbfff952ea7ce89e26cba89bbd  dmel-all-r6.24.gtf.gz
 
-###Unzip the gtf file
+### Unzip the gtf file
 	$ gunzip dmel-all-r6.24.gtf.gz  
 
 The GTF format consists of one line per feature, each containing 9 columns of data. Column 3 contains features.  
 
-#Print a summary report with the following information:  
+# Print a summary report with the following information:  
 1. Total number of features of each type, sorted from the most common to the least common  
 
 		grep -v "^#" dmel-all-r6.24.gtf | \
