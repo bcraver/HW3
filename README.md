@@ -81,6 +81,20 @@ The GTF format consists of one line per feature, each containing 9 columns of da
     115 rRNA  
      32 snRNA  
 
+### Comments
+
+Good job, with one comment. It's essential to download the pre-computed checksum to compare against. Then the easiest way to check is to use ```md5sum -c``` against the checksum file you downloaded (md5sum.txt in this case). It will automatically go through files listed in it and compute / compare the checksums.
+
+```
+$ wget ftp://ftp.flybase.net/genomes/Drosophila_melanogaster/current/gtf/md5sum.txt
+$ wget ftp://ftp.flybase.net/genomes/Drosophila_melanogaster/current/gtf/dmel-all-r6.24.gtf.gz
+$ md5sum dmel-all-r6.24.gtf.gz 
+5cd5dcfbfff952ea7ce89e26cba89bbd  dmel-all-r6.24.gtf.gz
+
+$ md5sum -c md5sum.txt
+dmel-all-r6.24.gtf.gz: OK
+```
+
 
 2. Total number of genes per chromosome arm (X, Y, 2L, 2R, 3L, 3R, 4) #Chromosome name in field #1, genes are features in field #3.
 
@@ -99,3 +113,24 @@ The GTF format consists of one line per feature, each containing 9 columns of da
    7839 4  
     639 Y  
 
+### Comments
+
+Almost correct. You forgot to filter for only genes. That requires just one line (here I used awk to do it):
+
+```
+$ grep -v "^[#]" dmel-all-r6.24.gtf \
+| awk ' $3 == "gene" ' \
+| cut -f1 \
+| sort \
+| uniq -c \
+| sort -rn \
+| head -7  
+
+   4202 3R
+   3628 2R
+   3501 2L
+   3464 3L
+   2676 X
+    113 Y
+    111 4
+```
